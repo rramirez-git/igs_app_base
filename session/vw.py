@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import TemplateView
 
@@ -36,8 +37,7 @@ class Login(TemplateView):
 
     def success_redirect(self):
         next_url = self.request.GET.get('next')
-        return HttpResponseRedirect(
-            next_url if next_url else reverse('session_imin'))
+        return redirect(next_url or 'session_imin')
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
@@ -66,7 +66,7 @@ class Logout(TemplateView):
 
     def get(self, request, *args, **kwargs):
         logout(self.request)
-        return HttpResponseRedirect(reverse('session_login'))
+        return redirect('session_login')
 
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)

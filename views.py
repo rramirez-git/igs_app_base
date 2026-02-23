@@ -16,6 +16,7 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 from typing import Any
+from django.shortcuts import redirect
 
 from .templatetags.crud_helpers import crud_label
 from .templatetags.crud_helpers import crud_smart_button
@@ -118,7 +119,7 @@ class GenericReadSuperCatalog(GenericRead):
             self.update_opcion(request.POST, request.FILES)
         elif action == "delete":
             self.delete_opcion(request.POST)
-        return HttpResponseRedirect(request.path)
+        return redirect(request.path)
 
 
 class GenericCreate(CreateView):
