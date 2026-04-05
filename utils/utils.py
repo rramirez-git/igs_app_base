@@ -214,7 +214,6 @@ def create_path(path: str) -> None:
         path_parts = os.path.split(path)
         create_path(path_parts[0])
         if path_parts[1] != "":
-            print(f"Creando {path_parts[1]} en {path_parts[0]}")
             os.mkdir(os.path.join(path_parts[0], path_parts[1]))
 
 
